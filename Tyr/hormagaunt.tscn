@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxygp5bbta7ux"]
+
+[ext_resource type="Script" path="res://Tyr/hormagaunt.gd" id="1_se08v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ybtt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88a76"]
+
+[node name="Hormagaunt" type="RigidBody2D"]
+linear_damp = 10.0
+angular_damp = 1.0
+script = ExtResource("1_se08v")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("BoxMesh_5ybtt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_88a76")
