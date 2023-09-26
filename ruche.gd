@@ -6,7 +6,7 @@ var hormagaunt = load("res://Tyr/hormagaunt.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for x in 10:
-		add_tyr(hormagaunt, position)
+		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
