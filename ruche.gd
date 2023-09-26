@@ -1,11 +1,13 @@
 extends RigidBody2D
 
+var type = "Ruche"
+
 var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for x in 10:
+	for x in 50:
 		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
 
 
@@ -13,8 +15,9 @@ func _ready():
 func _process(delta):
 	pass
 
-func add_tyr(tyr_to_add, pos):
-	var new_tyr: Node = tyr_to_add.instantiate()
+func add_tyr(tyr_to_add, pos: Vector2):
+	var new_tyr: RigidBody2D = tyr_to_add.instantiate()
 	new_tyr.transform.origin = pos
+	new_tyr.ruche_mere = self
 	list_tyr.append(new_tyr)
 	add_child(new_tyr)
