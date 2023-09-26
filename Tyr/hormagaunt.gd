@@ -52,21 +52,13 @@ func explore():
 func return_to_ruche(delta):
 	var dx:float = ruche_mere.position.x - position.x
 	var dy:float = ruche_mere.position.y - position.y
-	#var angle_2_ruche:float = atan2(dy,dx)
-
-	#var rot = min((2 * PI) - abs(angle_2_ruche - transform.get_rotation()), abs(angle_2_ruche - transform.get_rotation()))
-	#atan2(sin(angle_2_ruche-transform.get_rotation()), cos(angle_2_ruche-transform.get_rotation())) #angle_2_ruche #+ randf_range(-1, 1) * rotation_speed
-	#var dir = global_transform.x * speed
-	#apply_impulse( Vector2(dx,dy).normalized())
 	
-	var angle_to_ruche:Vector2 = Vector2(dx,dy).normalized()#.angle()
+	var angle_to_ruche:Vector2 = Vector2(dx,dy).normalized()
 	var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche)
-	apply_torque_impulse(angle_self/10.0) #rot # apply_torque(rot)
 	
-	#evasion_maneuver()
-#	var angle = (ruche_mere.global_position - self.global_position).angle()
-#	rotation = lerp_angle(self.rotation, angle, delta)
+	apply_torque_impulse(angle_self/10.0)
 	apply_impulse(global_transform.x * speed)
+	evasion_maneuver()
 
 func _on_enter_vision(body: RigidBody2D):
 	if body.type in types_to_avoid:
