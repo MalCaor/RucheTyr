@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b520t1pwgb6jx"]
+
+[ext_resource type="Script" path="res://hormagaunt.gd" id="1_x6q4a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yu0yd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t247f"]
+
+[node name="Hormagaunt" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553708, 0)
+linear_damp = 20.0
+script = ExtResource("1_x6q4a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_yu0yd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_t247f")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwm7s1ecuouec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88a76"]
+
+[node name="Scene2d" type="Node2D"]
+
+[node name="Hormagaunt" type="RigidBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Hormagaunt"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hormagaunt"]
+shape = SubResource("RectangleShape2D_88a76")
