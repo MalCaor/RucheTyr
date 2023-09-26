@@ -6,7 +6,7 @@ enum state_possible{
 var current_state: state_possible
 
 var speed: float = 1.0
-var rotation_speed = 2000
+var rotation_speed = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

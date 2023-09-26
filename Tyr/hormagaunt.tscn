@@ -5,6 +5,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_5ybtt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88a76"]
+size = Vector2(2, 2)
 
 [node name="Hormagaunt" type="RigidBody2D"]
 linear_damp = 10.0
@@ -12,6 +13,7 @@ angular_damp = 1.0
 script = ExtResource("1_se08v")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(2, 2)
 mesh = SubResource("BoxMesh_5ybtt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
