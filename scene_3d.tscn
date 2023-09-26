@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca76knuocd0o3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nrr48"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_n43ax"]
+map_width = 3
+map_depth = 3
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yu0yd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t247f"]
+
+[node name="Scene3D" type="Node3D"]
+
+[node name="Environement" type="RigidBody3D" parent="."]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environement"]
+mesh = SubResource("PlaneMesh_nrr48")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environement"]
+shape = SubResource("HeightMapShape3D_n43ax")
+
+[node name="Hormagaunt" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553708, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hormagaunt"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_yu0yd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hormagaunt"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_t247f")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693619, 2.9461)
+
+[node name="THE SUN" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.676452, 0.736487, 0, -0.736487, 0.676452, 0, 1, 0)
