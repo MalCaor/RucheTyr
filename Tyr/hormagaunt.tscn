@@ -6,13 +6,14 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_j6kao"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8c447"]
-radius = 1.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_xf10a"]
 radius = 4.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8c447"]
+radius = 1.0
+
 [node name="Hormagaunt" type="RigidBody2D"]
+max_contacts_reported = 1
 contact_monitor = true
 linear_damp = 10.0
 angular_damp = 1.0
@@ -27,14 +28,15 @@ position = Vector2(0.333984, -0.00390624)
 scale = Vector2(-0.910156, 0.265625)
 mesh = SubResource("BoxMesh_j6kao")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8c447")
-debug_color = Color(0.870588, 0.219608, 0.690196, 0.419608)
-
 [node name="vue" type="Area2D" parent="."]
 
 [node name="vueCollision" type="CollisionShape2D" parent="vue"]
 shape = SubResource("CircleShape2D_xf10a")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8c447")
+debug_color = Color(0.870588, 0.219608, 0.690196, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_collision"]
 [connection signal="body_entered" from="vue" to="." method="_on_enter_vision"]
 [connection signal="body_exited" from="vue" to="." method="_on_exit_vision"]
