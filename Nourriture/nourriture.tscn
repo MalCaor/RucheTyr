@@ -8,7 +8,7 @@
 radius = 5.0
 
 [node name="Nourriture" type="RigidBody2D"]
-max_contacts_reported = 1
+max_contacts_reported = 10
 contact_monitor = true
 freeze = true
 script = ExtResource("1_18441")

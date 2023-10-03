@@ -92,6 +92,7 @@ func evasion_maneuver():
 		apply_impulse(global_transform.x * speed * 0.1)
 
 func zerg_maneuver():
+	# approch nour
 	for body in list_body_to_approach:
 		var dx:float = body.position.x - position.x
 		var dy:float = body.position.y - position.y
@@ -101,8 +102,14 @@ func zerg_maneuver():
 		
 		apply_torque_impulse(angle_self/2)
 		apply_impulse(global_transform.x * speed)
+	# chech if full
+	if nbr_current_nour >= nbr_nour_max:
+		current_state = state_possible.return_ruche
+	if not list_body_to_approach:
+		current_state = state_possible.exploration
 
 
 func _on_collision(body):
 	if body.type == "Nourriture":
-		body.scale *= 0.8
+		body.eaten()
+		nbr_current_nour += 1
