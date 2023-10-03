@@ -1,25 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwm7s1ecuouec"]
+[gd_scene load_steps=5 format=3 uid="uid://bwm7s1ecuouec"]
 
+[ext_resource type="Script" path="res://World.gd" id="1_ko22t"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="2_aoyn8"]
 [ext_resource type="PackedScene" uid="uid://chqt7nxuah6f2" path="res://ruche.tscn" id="3_26ukf"]
-[ext_resource type="PackedScene" uid="uid://d2s3hjr7wt2xg" path="res://Nourriture/nourriture.tscn" id="3_mnnwp"]
+[ext_resource type="Script" path="res://BorderWorld.gd" id="4_8ls8k"]
 
 [node name="Scene2d" type="Node2D"]
+script = ExtResource("1_ko22t")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(3, 3)
 script = ExtResource("2_aoyn8")
 
 [node name="Ruche" parent="." instance=ExtResource("3_26ukf")]
 
-[node name="Nourriture" parent="." instance=ExtResource("3_mnnwp")]
-position = Vector2(42, 16)
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+contact_monitor = true
+freeze = true
+script = ExtResource("4_8ls8k")
 
-[node name="Nourriture2" parent="." instance=ExtResource("3_mnnwp")]
-position = Vector2(-26, 26)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(-192, -108, 192, -108, 192, -100, -192, -102)
 
-[node name="Nourriture3" parent="." instance=ExtResource("3_mnnwp")]
-position = Vector2(-25, -22)
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="RigidBody2D"]
+position = Vector2(-1, 210)
+polygon = PackedVector2Array(-192, -108, 192, -108, 192, -100, 69.7993, -100.636, -192, -102)
 
-[node name="Nourriture4" parent="." instance=ExtResource("3_mnnwp")]
-position = Vector2(48, -29)
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(-193, -102, -185, -102, -186, 108, -192, 108)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="RigidBody2D"]
+position = Vector2(377, 2)
+polygon = PackedVector2Array(-193, -102, -185, -102, -186, 108, -192, 108)

@@ -7,7 +7,8 @@ var ruche_mere: RigidBody2D
 var list_body_to_evade: Array[RigidBody2D] = [] # liste des body à éviter 
 var types_to_avoid = [
 	"Hormagaunt",
-	"Ruche"
+	"Ruche",
+	"Border"
 ]
 
 var list_body_to_approach: Array[RigidBody2D] = [] # liste des body à approcher 
@@ -26,7 +27,7 @@ var current_state: state_possible # Etat actuel de l'agent: defini l'action que 
 var speed: float = 3 # Vitesse de l'agent
 var rotation_speed = 10 # Vitesse de rotation de l'agent
 
-var nbr_nour_max: float = 5 # Quantite maximale qu'un agent peut transporter
+var nbr_nour_max: float = 1 # Quantite maximale qu'un agent peut transporter
 var nbr_current_nour: float = 0 # Quantite actuelle que transporte un agent
 
 var couleur: Color
