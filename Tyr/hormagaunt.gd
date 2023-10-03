@@ -110,6 +110,12 @@ func _on_collision(body):
 	if body.type == "Ruche" && nbr_current_nour>0:
 		ruche_mere.give_Nour_to_Ruche(nbr_current_nour)
 		nbr_current_nour=0
+		var dx:float = ruche_mere.position.x - position.x
+		var dy:float = ruche_mere.position.y - position.y
+		
+		var angle_to_ruche:Vector2 = Vector2(-dx,-dy).normalized()
+		var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche)
+		apply_torque_impulse(angle_self)
 
 
 func _on_enter_vision_collision(body):
