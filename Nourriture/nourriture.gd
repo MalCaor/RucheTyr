@@ -2,9 +2,11 @@ extends RigidBody2D
 
 var type = "Nourriture"
 var quantite: int = 5;
+var couleur = Color.SEA_GREEN
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.modulate = couleur
 	pass # Replace with function body.
 
 
