@@ -23,7 +23,7 @@ enum state_possible{ # Etat possible pour un agent: definie ses actions
 
 var current_state: state_possible # Etat actuel de l'agent: defini l'action que l'agent effectue
 
-var speed: float = 1.0 # Vitesse de l'agent
+var speed: float = 3 # Vitesse de l'agent
 var rotation_speed = 10 # Vitesse de rotation de l'agent
 
 var nbr_nour_max: float = 5 # Quantite maximale qu'un agent peut transporter
@@ -83,8 +83,9 @@ func evasion_maneuver():
 		# evasion vector
 		var target_vect = global_position.direction_to(body.global_position)
 		var angle = -1 * self.global_transform.x.angle_to(target_vect)
+		
+		# apply manu
 		apply_torque(puissance*angle)
-		apply_impulse(global_transform.x * speed * 0.1)
 
 func zerg_maneuver():
 	# approch nour
