@@ -26,7 +26,7 @@ var current_state: state_possible # Etat actuel de l'agent: defini l'action que 
 var speed: float = 1.0 # Vitesse de l'agent
 var rotation_speed = 10 # Vitesse de rotation de l'agent
 
-var nbr_nour_max: float = 1 # Quantite maximale qu'un agent peut transporter
+var nbr_nour_max: float = 5 # Quantite maximale qu'un agent peut transporter
 var nbr_current_nour: float = 0 # Quantite actuelle que transporte un agent
 
 
@@ -37,7 +37,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	stat_change()
+	state_change()
 	
 	if current_state == state_possible.exploration:
 		explore()
@@ -46,7 +46,7 @@ func _process(delta):
 	if current_state == state_possible.zerg:
 		zerg_maneuver()
 
-func stat_change():
+func state_change():
 	if self.nbr_current_nour >= nbr_nour_max:
 		self.current_state = state_possible.return_ruche
 	elif self.list_body_to_approach:
