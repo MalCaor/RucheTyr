@@ -27,8 +27,8 @@ var current_state: state_possible # Etat actuel de l'agent: defini l'action que 
 var speed: float = 3 # Vitesse de l'agent
 var rotation_speed = 10 # Vitesse de rotation de l'agent
 
-var nbr_nour_max: float = 1 # Quantite maximale qu'un agent peut transporter
-var nbr_current_nour: float = 0 # Quantite actuelle que transporte un agent
+var nbr_food_max: float = 5 # Quantite maximale qu'un agent peut transporter
+var nbr_current_food: float = 0 # Quantite actuelle que transporte un agent
 
 var couleur: Color
 
@@ -52,7 +52,7 @@ func _process(delta):
 		zerg_maneuver()
 
 func state_change():
-	if self.nbr_current_nour >= nbr_nour_max && self.nbr_current_nour!=0:
+	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
 	elif self.list_body_to_approach:
 		self.current_state = state_possible.zerg
@@ -112,11 +112,11 @@ func go_forward():
 func _on_collision(body):
 	if body.type == "Nourriture":
 		body.eaten()
-		nbr_current_nour += 1
+		nbr_current_food += 1
 		self.modulate = Color.RED
-	if body.type == "Ruche" && nbr_current_nour>0:
-		ruche_mere.give_Nour_to_Ruche(nbr_current_nour)
-		nbr_current_nour=0
+	if body.type == "Ruche" && nbr_current_food>0:
+		ruche_mere.give_food_to_Ruche(nbr_current_food)
+		nbr_current_food=0
 		self.modulate = couleur
 		var dx:float = ruche_mere.position.x - position.x
 		var dy:float = ruche_mere.position.y - position.y
