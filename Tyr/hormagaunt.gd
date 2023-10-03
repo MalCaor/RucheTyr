@@ -35,7 +35,7 @@ var couleur: Color
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_state = state_possible.exploration
-	couleur = ruche_mere.couleur.darkened(0.5)
+	couleur = ruche_mere.couleur.darkened(0.3)
 	self.modulate = couleur
 
 
