@@ -69,18 +69,6 @@ func return_to_ruche(delta):
 	apply_impulse(global_transform.x * speed)
 	evasion_maneuver()
 
-func _on_enter_vision(body: RigidBody2D):
-	if body.type in types_to_avoid:
-		list_body_to_evade.append(body)
-	if body.type in types_to_approach:
-		list_body_to_approach.append(body)
-	
-func _on_exit_vision(body):
-	if body.type in types_to_avoid:
-		list_body_to_evade.remove_at(list_body_to_evade.find(body))
-	if body.type in types_to_approach:
-		list_body_to_approach.remove_at(list_body_to_approach.find(body))
-
 		
 func evasion_maneuver():
 	for body in list_body_to_evade:
@@ -113,3 +101,23 @@ func _on_collision(body):
 	if body.type == "Nourriture":
 		body.eaten()
 		nbr_current_nour += 1
+
+
+func _on_enter_vision_collision(body):
+	if body.type in types_to_avoid:
+		list_body_to_evade.append(body)
+
+
+func _on_exit_vision_collision(body):
+	if body.type in types_to_avoid:
+		list_body_to_evade.remove_at(list_body_to_evade.find(body))
+
+
+func _on_entered_vision_nour(body):
+	if body.type in types_to_approach:
+		list_body_to_approach.append(body)
+
+
+func _on_exited_vision_nour(body):
+	if body.type in types_to_approach:
+		list_body_to_approach.remove_at(list_body_to_approach.find(body))
