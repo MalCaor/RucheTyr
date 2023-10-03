@@ -25,4 +25,4 @@ func add_tyr(tyr_to_add, pos: Vector2):
 
 func give_Nour_to_Ruche(quantite:int):
 	quantite_nourriture+=quantite
-	print("quantite_nourriture de la Ruche = "+quantite_nourriture)
+	print("quantite_nourriture de la Ruche = %s" % quantite_nourriture)
