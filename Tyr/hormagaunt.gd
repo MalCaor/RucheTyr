@@ -78,7 +78,7 @@ func evasion_maneuver():
 	for body in list_body_to_evade:
 		var dist = max(position.distance_to(body.position), 1)
 		var puissance = 1 / dist
-		if self.global_transform.x.angle_to(body.global_position) > 0:
+		if self.global_transform.x.angle_to(body.position) > 0:
 			apply_torque(puissance*rotation_speed)
 		else:
 			apply_torque(-1* puissance * rotation_speed)
