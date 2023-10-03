@@ -4,28 +4,30 @@ var type = "Hormagaunt"
 
 var ruche_mere: RigidBody2D
 
+var list_body_to_evade: Array[RigidBody2D] = [] # liste des body à éviter 
 var types_to_avoid = [
 	"Hormagaunt",
 	"Ruche"
 ]
-var list_body_to_evade: Array[RigidBody2D] = []
+
+var list_body_to_approach: Array[RigidBody2D] = [] # liste des body à approcher 
 var types_to_approach = [
 	"Nourriture"
 ]
-var list_body_to_approach: Array[RigidBody2D] = []
 
-enum state_possible{
+enum state_possible{ # Etat possible pour un agent: definie ses actions
 	exploration,
 	return_ruche,
 	zerg
 }
-var current_state: state_possible
 
-var speed: float = 1.0
-var rotation_speed = 10
+var current_state: state_possible # Etat actuel de l'agent: defini l'action que l'agent effectue
 
-var nbr_nour_max: float = 1
-var nbr_current_nour: float = 0
+var speed: float = 1.0 # Vitesse de l'agent
+var rotation_speed = 10 # Vitesse de rotation de l'agent
+
+var nbr_nour_max: float = 1 # Quantite maximale qu'un agent peut transporter
+var nbr_current_nour: float = 0 # Quantite actuelle que transporte un agent
 
 
 # Called when the node enters the scene tree for the first time.
