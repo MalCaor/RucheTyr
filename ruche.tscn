@@ -5,13 +5,14 @@
 [sub_resource type="SphereMesh" id="SphereMesh_cf6i4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vuhc8"]
+radius = 7.0
 
 [node name="Ruche" type="RigidBody2D"]
 freeze = true
 script = ExtResource("1_5gw6e")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-scale = Vector2(20, 20)
+scale = Vector2(14.0045, 14.0045)
 mesh = SubResource("SphereMesh_cf6i4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -76,11 +76,12 @@ func return_to_ruche(delta):
 		
 func evasion_maneuver():
 	for body in list_body_to_evade:
-		var dist_to_body = position.distance_to(body.position) / 10
+		var dist = max(position.distance_to(body.position), 1)
+		var puissance = 1 / dist
 		if self.global_transform.x.angle_to(body.global_position) > 0:
-			apply_torque(dist_to_body*rotation_speed)
+			apply_torque(puissance*rotation_speed)
 		else:
-			apply_torque(-1* dist_to_body * rotation_speed)
+			apply_torque(-1* puissance * rotation_speed)
 		apply_impulse(global_transform.x * speed * 0.1)
 
 func zerg_maneuver():
@@ -95,6 +96,8 @@ func zerg_maneuver():
 		
 		apply_torque_impulse(angle_self/2)
 		apply_impulse(global_transform.x * speed)
+	
+	evasion_maneuver()
 
 
 func _on_collision(body):
