@@ -4,6 +4,7 @@ var type = "Ruche"
 
 var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
+var quantite_nourriture
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,3 +22,6 @@ func add_tyr(tyr_to_add, pos: Vector2):
 	new_tyr.ruche_mere = self
 	list_tyr.append(new_tyr)
 	add_child(new_tyr)
+
+func give_Nour_to_Ruche(quantite:int):
+	quantite_nourriture+=quantite
