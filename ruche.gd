@@ -4,7 +4,7 @@ var type = "Ruche"
 
 var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
-var quantite_nourriture=0
+var food_quantity=0
 
 var couleur = Color.VIOLET
 
@@ -17,8 +17,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(quantite_nourriture>=5):
-		quantite_nourriture-=5
+	if(food_quantity>=5):
+		food_quantity-=5
 		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
 
 func add_tyr(tyr_to_add, pos: Vector2):
@@ -28,6 +28,6 @@ func add_tyr(tyr_to_add, pos: Vector2):
 	list_tyr.append(new_tyr)
 	add_child(new_tyr)
 
-func give_Nour_to_Ruche(quantite:int):
-	quantite_nourriture+=quantite
-	print("quantite_nourriture de la Ruche = %s" % quantite_nourriture)
+func give_food_to_Ruche(quantite:int):
+	food_quantity+=quantite
+	print("food_quantity de la Ruche = %s" % food_quantity)
