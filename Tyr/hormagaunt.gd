@@ -29,10 +29,14 @@ var rotation_speed = 10 # Vitesse de rotation de l'agent
 var nbr_nour_max: float = 5 # Quantite maximale qu'un agent peut transporter
 var nbr_current_nour: float = 0 # Quantite actuelle que transporte un agent
 
+var couleur: Color
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_state = state_possible.exploration
+	couleur = ruche_mere.couleur.darkened(0.5)
+	self.modulate = couleur
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -112,7 +116,7 @@ func _on_collision(body):
 	if body.type == "Ruche" && nbr_current_nour>0:
 		ruche_mere.give_Nour_to_Ruche(nbr_current_nour)
 		nbr_current_nour=0
-		self.modulate = Color.WHITE
+		self.modulate = couleur
 		var dx:float = ruche_mere.position.x - position.x
 		var dy:float = ruche_mere.position.y - position.y
 		

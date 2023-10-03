@@ -6,8 +6,11 @@ var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
 var quantite_nourriture=0
 
+var couleur = Color.VIOLET
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.modulate = couleur
 	for x in 50:
 		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
 
