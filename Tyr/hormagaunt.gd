@@ -47,7 +47,7 @@ func _process(delta):
 		zerg_maneuver()
 
 func state_change():
-	if self.nbr_current_nour >= nbr_nour_max:
+	if self.nbr_current_nour >= nbr_nour_max && self.nbr_current_nour!=0:
 		self.current_state = state_possible.return_ruche
 	elif self.list_body_to_approach:
 		self.current_state = state_possible.zerg
@@ -108,13 +108,15 @@ func _on_collision(body):
 	if body.type == "Nourriture":
 		body.eaten()
 		nbr_current_nour += 1
+		self.modulate = Color.RED
 	if body.type == "Ruche" && nbr_current_nour>0:
 		ruche_mere.give_Nour_to_Ruche(nbr_current_nour)
 		nbr_current_nour=0
+		self.modulate = Color.WHITE
 		var dx:float = ruche_mere.position.x - position.x
 		var dy:float = ruche_mere.position.y - position.y
 		
-		var angle_to_ruche:Vector2 = Vector2(-dx,-dy).normalized()
+		var angle_to_ruche:Vector2 = -Vector2(dx,dy).normalized()
 		var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche)
 		apply_torque_impulse(angle_self)
 
