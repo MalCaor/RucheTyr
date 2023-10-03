@@ -58,9 +58,8 @@ func explore():
 	var rot = randf_range(-1, 1) * rotation_speed
 	var dir = global_transform.x * speed
 	apply_torque(rot)
-	apply_impulse(dir)
-	
 	evasion_maneuver()
+	go_forward()
 
 func return_to_ruche(delta):
 	var dx:float = ruche_mere.position.x - position.x
@@ -70,8 +69,8 @@ func return_to_ruche(delta):
 	var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche)
 	
 	apply_torque_impulse(angle_self/2)
-	apply_impulse(global_transform.x * speed)
 	evasion_maneuver()
+	go_forward()
 
 		
 func evasion_maneuver():
@@ -98,11 +97,13 @@ func zerg_maneuver():
 		var angle_self:float = self.global_transform.x.angle_to(angle_to_nour)
 		
 		apply_torque_impulse(angle_self/2)
-		apply_impulse(global_transform.x * speed)
+		go_forward()
 	
 	evasion_maneuver()
 
-
+func go_forward():
+	apply_impulse(global_transform.x * speed)
+	
 func _on_collision(body):
 	if body.type == "Nourriture":
 		body.eaten()
