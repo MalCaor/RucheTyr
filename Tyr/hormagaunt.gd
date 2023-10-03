@@ -47,10 +47,12 @@ func _process(delta):
 		zerg_maneuver()
 
 func stat_change():
-	if self.nbr_current_nour == nbr_nour_max:
+	if self.nbr_current_nour >= nbr_nour_max:
 		self.current_state = state_possible.return_ruche
 	elif self.list_body_to_approach:
 		self.current_state = state_possible.zerg
+	else:
+		self.current_state = state_possible.exploration
 
 func explore():
 	if(list_body_to_approach!=[]):
@@ -103,11 +105,6 @@ func zerg_maneuver():
 		
 		apply_torque_impulse(angle_self/2)
 		apply_impulse(global_transform.x * speed)
-	# chech if full
-	if nbr_current_nour >= nbr_nour_max:
-		current_state = state_possible.return_ruche
-	if not list_body_to_approach:
-		current_state = state_possible.exploration
 
 
 func _on_collision(body):
