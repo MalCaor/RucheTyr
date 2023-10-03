@@ -8,7 +8,7 @@ var quantite_nourriture=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for x in 10:
+	for x in 50:
 		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
 
 
