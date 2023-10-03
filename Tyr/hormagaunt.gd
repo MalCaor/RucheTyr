@@ -81,7 +81,8 @@ func evasion_maneuver():
 
 func zerg_maneuver():
 	# approch nour
-	for body in list_body_to_approach:
+	if list_body_to_approach:
+		var body = list_body_to_approach[0]
 		var dx:float = body.position.x - position.x
 		var dy:float = body.position.y - position.y
 		
