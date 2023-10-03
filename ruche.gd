@@ -8,13 +8,15 @@ var quantite_nourriture=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for x in 50:
+	for x in 10:
 		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(quantite_nourriture>=5):
+		quantite_nourriture-=5
+		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
 
 func add_tyr(tyr_to_add, pos: Vector2):
 	var new_tyr: RigidBody2D = tyr_to_add.instantiate()

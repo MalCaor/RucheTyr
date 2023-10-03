@@ -55,20 +55,10 @@ func stat_change():
 		self.current_state = state_possible.exploration
 
 func explore():
-	if(list_body_to_approach!=[]):
-		var dx:float = list_body_to_approach[0].position.x - position.x
-		var dy:float = list_body_to_approach[0].position.y - position.y
-		
-		var angle_to_reach:Vector2 = Vector2(dx,dy).normalized()
-		var angle_self:float = self.global_transform.x.angle_to(angle_to_reach)
-		
-		apply_torque_impulse(angle_self/2)
-		apply_impulse(global_transform.x * speed)
-	else:
-		var rot = randf_range(-1, 1) * rotation_speed
-		var dir = global_transform.x * speed
-		apply_torque(rot)
-		apply_impulse(dir)
+	var rot = randf_range(-1, 1) * rotation_speed
+	var dir = global_transform.x * speed
+	apply_torque(rot)
+	apply_impulse(dir)
 	
 	evasion_maneuver()
 
@@ -114,7 +104,6 @@ func _on_collision(body):
 	if body.type == "Ruche" && nbr_current_nour>0:
 		ruche_mere.give_Nour_to_Ruche(nbr_current_nour)
 		nbr_current_nour=0
-		current_state=state_possible.exploration
 
 
 func _on_enter_vision_collision(body):
