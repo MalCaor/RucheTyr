@@ -11,7 +11,7 @@ var couleur = Color.VIOLET
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.modulate = couleur
-	for x in 50:
+	for x in 20:
 		add_tyr(hormagaunt, position+Vector2(randf_range(10,15), randf_range(10,15)))
 
 
@@ -31,3 +31,4 @@ func add_tyr(tyr_to_add, pos: Vector2):
 func give_food_to_Ruche(quantite:int):
 	food_quantity+=quantite
 	print("food_quantity de la Ruche = %s" % food_quantity)
+	print(list_tyr.size())

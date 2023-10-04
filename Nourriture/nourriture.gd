@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var type = "Nourriture"
-var quantite: int = 5;
+var quantite: int = 50;
 var couleur = Color.SEA_GREEN
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +16,7 @@ func _process(delta):
 
 func eaten():
 	quantite -= 1;
-	self.scale /= 2
+	self.scale /= 1.1;
 	if quantite <= 0:
 		self.queue_free()
+		print("POP")
