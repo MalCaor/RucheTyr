@@ -61,7 +61,6 @@ func state_change():
 
 func explore():
 	var rot = randf_range(-1, 1) * rotation_speed
-	var dir = global_transform.x * speed
 	apply_torque(rot)
 	evasion_maneuver()
 	go_forward()
