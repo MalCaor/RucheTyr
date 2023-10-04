@@ -27,8 +27,10 @@ var current_state: state_possible # Etat actuel de l'agent: defini l'action que 
 var speed: float = 3 # Vitesse de l'agent
 var rotation_speed = 10 # Vitesse de rotation de l'agent
 
-var nbr_food_max: float = 5 # Quantite maximale qu'un agent peut transporter
+var nbr_food_max: float = 2 # Quantite maximale qu'un agent peut transporter
 var nbr_current_food: float = 0 # Quantite actuelle que transporte un agent
+
+var target_explor: Vector2
 
 var couleur: Color
 
@@ -60,8 +62,18 @@ func state_change():
 		self.current_state = state_possible.exploration
 
 func explore():
-	var rot = randf_range(-1, 1) * rotation_speed
-	apply_torque(rot)
+	if not target_explor or self.position.distance_to(target_explor) < 10:
+		target_explor = Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
+	
+	# go to target
+	var dx:float = target_explor.x - position.x
+	var dy:float = target_explor.y - position.y
+	
+	var angle_to_target:Vector2 = Vector2(dx,dy).normalized()
+	var angle_self:float = self.global_transform.x.angle_to(angle_to_target)
+	
+	apply_torque_impulse(angle_self/2)
+	
 	evasion_maneuver()
 	go_forward()
 
