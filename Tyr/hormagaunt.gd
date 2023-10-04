@@ -80,16 +80,13 @@ func return_to_ruche(delta):
 		
 func evasion_maneuver():
 	for body in list_body_to_evade:
-		# puissance to evade 
-		var dist = max(position.distance_to(body.position), 1)
-		var puissance = 1 / dist
+		var dx:float = body.position.x - position.x
+		var dy:float = body.position.y - position.y
 		
-		# evasion vector
-		var target_vect = global_position.direction_to(body.global_position)
-		var angle = -1 * self.global_transform.x.angle_to(target_vect)
+		var angle_target:Vector2 = Vector2(dx,dy).normalized()
+		var angle_self:float = self.global_transform.x.angle_to(angle_target)
 		
-		# apply manu
-		apply_torque(puissance*angle)
+		apply_torque_impulse((angle_self/20) * -1)
 
 func zerg_maneuver():
 	# approch nour
