@@ -143,7 +143,11 @@ func _on_collision(body):
 		self.look_at(-angle_to_ruche)
 		go_forward()
 	if body.type in tyranids && body.ruche_mere != self.ruche_mere:
-		body.queue_free()
+		# sur du 4+
+		if randi_range(0,1):
+			body.queue_free()
+		else:
+			self.queue_free()
 
 
 func _on_enter_vision_collision(body):
