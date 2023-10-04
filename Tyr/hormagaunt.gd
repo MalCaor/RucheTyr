@@ -58,10 +58,13 @@ func _process(delta):
 func state_change():
 	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
+		self.modulate = Color.WHITE
 	elif self.list_body_to_approach:
 		self.current_state = state_possible.zerg
+		self.modulate = Color.RED
 	else:
 		self.current_state = state_possible.exploration
+		self.modulate = Color.PURPLE
 
 func explore():
 	# generate target
@@ -119,12 +122,12 @@ func _on_collision(body):
 	if body.type == "Nourriture":
 		body.eaten()
 		nbr_current_food += 1
-		self.modulate = Color.RED
+		#self.modulate = Color.RED
 	elif body.type == "Ruche":
 		if nbr_current_food>0:
 			ruche_mere.give_food_to_Ruche(nbr_current_food)
 			nbr_current_food=0
-			self.modulate = couleur
+			#self.modulate = couleur
 		
 		var dx:float = ruche_mere.position.x - position.x
 		var dy:float = ruche_mere.position.y - position.y
@@ -133,6 +136,7 @@ func _on_collision(body):
 		var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche*-1)
 		
 		apply_torque_impulse(angle_self*10)
+		self.look_at(-angle_to_ruche)
 		go_forward()
 
 
