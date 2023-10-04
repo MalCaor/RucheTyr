@@ -127,7 +127,7 @@ func _on_collision(body):
 		body.eaten()
 		nbr_current_food += 1
 		#self.modulate = Color.RED
-	elif body.type == "Ruche":
+	if body.type == "Ruche" && body == self.ruche_mere:
 		if nbr_current_food>0:
 			ruche_mere.give_food_to_Ruche(nbr_current_food)
 			nbr_current_food=0
@@ -135,19 +135,26 @@ func _on_collision(body):
 		
 		var dx:float = ruche_mere.position.x - position.x
 		var dy:float = ruche_mere.position.y - position.y
-		
 		var angle_to_ruche:Vector2 = Vector2(dx,dy).normalized()
 		var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche*-1)
+		apply_torque_impulse(angle_self*10)
+		self.look_at(-angle_to_ruche)
+		go_forward()
+	if body.type == "Ruche" && body != self.ruche_mere:
+		if nbr_current_food!=0:
+			nbr_current_food = body.get_food_of_Ruche(nbr_food_max - nbr_current_food)
 		
+		var dx:float = ruche_mere.position.x - position.x
+		var dy:float = ruche_mere.position.y - position.y
+		var angle_to_ruche:Vector2 = Vector2(dx,dy).normalized()
+		var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche*-1)
 		apply_torque_impulse(angle_self*10)
 		self.look_at(-angle_to_ruche)
 		go_forward()
 	if body.type in tyranids && body.ruche_mere != self.ruche_mere:
 		# sur du 4+
-		if randi_range(0,1):
+		if randi_range(0,6)>=5:
 			body.queue_free()
-		else:
-			self.queue_free()
 
 
 func _on_enter_vision_collision(body):

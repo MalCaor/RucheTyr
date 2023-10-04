@@ -29,5 +29,13 @@ func add_tyr(tyr_to_add):
 
 func give_food_to_Ruche(quantite:int):
 	food_quantity+=quantite
-	print("food_quantity de la Ruche = %s" % food_quantity)
-	print(list_tyr.size())
+	#print("food_quantity de la Ruche = %s" % food_quantity)
+	
+func get_food_of_Ruche(quantite:int):
+	if(quantite >= food_quantity):
+		food_quantity=0
+		return food_quantity
+	else:
+		food_quantity-=quantite
+		return quantite
+	#print("food_quantity de la Ruche = %s" % food_quantity)

@@ -17,9 +17,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	timer+=delta
-	if timer > 5:
+	if timer > 15:
 		print("SPAWN")
-		spawn_nour()
+		#spawn_nour()
 		timer = 0
 
 func spawn_nour():

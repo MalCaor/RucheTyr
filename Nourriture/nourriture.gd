@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var type = "Nourriture"
-var quantite: int = 50;
+var quantite: int = 20;
 var couleur = Color.SEA_GREEN
 
 # Called when the node enters the scene tree for the first time.
