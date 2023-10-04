@@ -14,6 +14,7 @@ script = ExtResource("2_aoyn8")
 
 [node name="Ruche" parent="." instance=ExtResource("3_26ukf")]
 position = Vector2(151, -80)
+couleur = Color(0.975664, 4.57242e-06, 1.54018e-06, 1)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 contact_monitor = true

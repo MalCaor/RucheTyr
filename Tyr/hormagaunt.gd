@@ -5,8 +5,12 @@ var type = "Hormagaunt"
 var ruche_mere: RigidBody2D
 
 var list_body_to_evade: Array[RigidBody2D] = [] # liste des body à éviter 
+
+var tyranids = [
+	"Hormagaunt"
+]
+
 var types_to_avoid = [
-	"Hormagaunt",
 	"Ruche",
 	"Border"
 ]
@@ -151,10 +155,16 @@ func _on_exit_vision_collision(body):
 
 
 func _on_entered_vision_nour(body):
+	if body.type in tyranids:
+		if body.ruche_mere != self.ruche_mere:
+			list_body_to_approach.append(body)
 	if body.type in types_to_approach:
 		list_body_to_approach.append(body)
 
 
 func _on_exited_vision_nour(body):
+	if body.type in tyranids:
+		if body.ruche_mere != self.ruche_mere:
+			list_body_to_approach.remove_at(list_body_to_approach.find(body))
 	if body.type in types_to_approach:
 		list_body_to_approach.remove_at(list_body_to_approach.find(body))
