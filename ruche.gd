@@ -6,7 +6,7 @@ var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
 var food_quantity=0
 
-var couleur = Color.VIOLET
+@export var couleur = Color.VIOLET
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

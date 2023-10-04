@@ -39,9 +39,12 @@ polygon = PackedVector2Array(-198, -163, -188, -167, -187, 153, -195, 144)
 
 [node name="Ruche2" parent="." instance=ExtResource("3_26ukf")]
 position = Vector2(-148, -73)
+couleur = Color(0.607843, 0.0666667, 0.619608, 1)
 
 [node name="Ruche3" parent="." instance=ExtResource("3_26ukf")]
 position = Vector2(140, 72)
+couleur = Color(0.176471, 0.717647, 0.937255, 1)
 
 [node name="Ruche4" parent="." instance=ExtResource("3_26ukf")]
 position = Vector2(-157, 83)
+couleur = Color(0.807843, 0.490196, 0.176471, 1)
