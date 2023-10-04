@@ -134,8 +134,6 @@ func _on_collision(body):
 		
 		apply_torque_impulse(angle_self*10)
 		go_forward()
-		
-
 
 
 func _on_enter_vision_collision(body):
