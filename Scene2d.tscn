@@ -14,6 +14,12 @@ script = ExtResource("2_aoyn8")
 
 [node name="Ruche" parent="." instance=ExtResource("3_26ukf")]
 
+[node name="Ruche2" parent="." instance=ExtResource("3_26ukf")]
+position = Vector2(-128, -62)
+
+[node name="Ruche3" parent="." instance=ExtResource("3_26ukf")]
+position = Vector2(149, 78)
+
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 contact_monitor = true
 freeze = true
