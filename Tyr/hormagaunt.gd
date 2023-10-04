@@ -53,6 +53,8 @@ func _process(delta):
 	if current_state == state_possible.zerg:
 		zerg_maneuver()
 
+### BEHAVIOUR FUNCTION ###
+
 func state_change():
 	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
@@ -117,6 +119,8 @@ func zerg_maneuver():
 
 func go_forward():
 	apply_impulse(global_transform.x * speed)
+	
+### TRIGGER FUNCTION ###
 	
 func _on_collision(body):
 	if body.type == "Nourriture":
