@@ -48,9 +48,9 @@ func _process(delta):
 	
 	if current_state == state_possible.exploration:
 		explore()
-	if current_state == state_possible.return_ruche:
+	elif current_state == state_possible.return_ruche:
 		return_to_ruche(delta)
-	if current_state == state_possible.zerg:
+	elif current_state == state_possible.zerg:
 		zerg_maneuver()
 
 ### BEHAVIOUR FUNCTION ###
