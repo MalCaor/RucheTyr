@@ -10,8 +10,11 @@ var tyranids = [
 	"Hormagaunt"
 ]
 
+var ruches = [
+	"Ruche"
+]
+
 var types_to_avoid = [
-	"Ruche",
 	"Border"
 ]
 
@@ -171,6 +174,9 @@ func _on_entered_vision_nour(body):
 	if body.type in tyranids:
 		if body.ruche_mere != self.ruche_mere:
 			list_body_to_approach.append(body)
+	if body.type in ruches:
+		if body != self.ruche_mere:
+			list_body_to_approach.append(body)
 	if body.type in types_to_approach:
 		list_body_to_approach.append(body)
 
@@ -178,6 +184,9 @@ func _on_entered_vision_nour(body):
 func _on_exited_vision_nour(body):
 	if body.type in tyranids:
 		if body.ruche_mere != self.ruche_mere:
+			list_body_to_approach.remove_at(list_body_to_approach.find(body))
+	if body.type in ruches:
+		if body != self.ruche_mere:
 			list_body_to_approach.remove_at(list_body_to_approach.find(body))
 	if body.type in types_to_approach:
 		list_body_to_approach.remove_at(list_body_to_approach.find(body))
