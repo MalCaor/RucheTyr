@@ -9,16 +9,11 @@
 script = ExtResource("1_ko22t")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 script = ExtResource("2_aoyn8")
 
 [node name="Ruche" parent="." instance=ExtResource("3_26ukf")]
-
-[node name="Ruche2" parent="." instance=ExtResource("3_26ukf")]
-position = Vector2(-128, -62)
-
-[node name="Ruche3" parent="." instance=ExtResource("3_26ukf")]
-position = Vector2(149, 78)
+position = Vector2(151, -80)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 contact_monitor = true
@@ -38,3 +33,12 @@ polygon = PackedVector2Array(-193, -102, -185, -102, -186, 108, -192, 108)
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="RigidBody2D"]
 position = Vector2(377, 2)
 polygon = PackedVector2Array(-193, -102, -185, -102, -186, 108, -192, 108)
+
+[node name="Ruche2" parent="." instance=ExtResource("3_26ukf")]
+position = Vector2(-148, -73)
+
+[node name="Ruche3" parent="." instance=ExtResource("3_26ukf")]
+position = Vector2(140, 72)
+
+[node name="Ruche4" parent="." instance=ExtResource("3_26ukf")]
+position = Vector2(-157, 83)
