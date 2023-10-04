@@ -109,8 +109,8 @@ func go_forward():
 ### UTILITY FUNCTION ###
 
 func angle_to_target(vector_target: Vector2):
-	var dx:float = vector_target.x - position.x
-	var dy:float = vector_target.y - position.y
+	var dx:float = vector_target.x - global_position.x
+	var dy:float = vector_target.y - global_position.y
 	
 	var angle_to_nour:Vector2 = Vector2(dx,dy).normalized()
 	var angle_self:float = self.global_transform.x.angle_to(angle_to_nour)
