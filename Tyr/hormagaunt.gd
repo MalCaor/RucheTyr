@@ -62,16 +62,17 @@ func state_change():
 		self.current_state = state_possible.exploration
 
 func explore():
+	# generate target
 	if not target_explor or self.position.distance_to(target_explor) < 10:
 		target_explor = Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
 	
-	# go to target
+	# travel calculation
 	var dx:float = target_explor.x - position.x
 	var dy:float = target_explor.y - position.y
-	
 	var angle_to_target:Vector2 = Vector2(dx,dy).normalized()
 	var angle_self:float = self.global_transform.x.angle_to(angle_to_target)
 	
+	# apply navigation
 	apply_torque_impulse(angle_self/2)
 	
 	evasion_maneuver()
