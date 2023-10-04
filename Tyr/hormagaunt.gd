@@ -53,6 +53,8 @@ func _process(delta):
 	if current_state == state_possible.zerg:
 		zerg_maneuver()
 
+### BEHAVIOUR FUNCTION ###
+
 func state_change():
 	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
@@ -67,10 +69,7 @@ func explore():
 		target_explor = Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
 	
 	# travel calculation
-	var dx:float = target_explor.x - position.x
-	var dy:float = target_explor.y - position.y
-	var angle_to_target:Vector2 = Vector2(dx,dy).normalized()
-	var angle_self:float = self.global_transform.x.angle_to(angle_to_target)
+	var angle_self = angle_to_target(target_explor)
 	
 	# apply navigation
 	apply_torque_impulse(angle_self/2)
@@ -79,11 +78,7 @@ func explore():
 	go_forward()
 
 func return_to_ruche(delta):
-	var dx:float = ruche_mere.position.x - position.x
-	var dy:float = ruche_mere.position.y - position.y
-	
-	var angle_to_ruche:Vector2 = Vector2(dx,dy).normalized()
-	var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche)
+	var angle_self = angle_to_target(ruche_mere.position)
 	
 	apply_torque_impulse(angle_self/2)
 	go_forward()
@@ -91,24 +86,14 @@ func return_to_ruche(delta):
 		
 func evasion_maneuver():
 	for body in list_body_to_evade:
-		var dx:float = body.position.x - position.x
-		var dy:float = body.position.y - position.y
-		
-		var angle_target:Vector2 = Vector2(dx,dy).normalized()
-		var angle_self:float = self.global_transform.x.angle_to(angle_target)
-		
+		var angle_self = angle_to_target(body.position)
 		apply_torque_impulse((angle_self/10) * -1)
 
 func zerg_maneuver():
 	# approch nour
 	if list_body_to_approach:
 		var body = list_body_to_approach[0]
-		var dx:float = body.position.x - position.x
-		var dy:float = body.position.y - position.y
-		
-		var angle_to_nour:Vector2 = Vector2(dx,dy).normalized()
-		var angle_self:float = self.global_transform.x.angle_to(angle_to_nour)
-		
+		var angle_self = angle_to_target(body.position)
 		apply_torque_impulse(angle_self/2)
 		go_forward()
 	
@@ -116,6 +101,19 @@ func zerg_maneuver():
 
 func go_forward():
 	apply_impulse(global_transform.x * speed)
+	
+	
+### UTILITY FUNCTION ###
+
+func angle_to_target(vector_target: Vector2):
+	var dx:float = vector_target.x - position.x
+	var dy:float = vector_target.y - position.y
+	
+	var angle_to_nour:Vector2 = Vector2(dx,dy).normalized()
+	var angle_self:float = self.global_transform.x.angle_to(angle_to_nour)
+	return angle_self
+
+### TRIGGER FUNCTION ###
 	
 func _on_collision(body):
 	if body.type == "Nourriture":
@@ -136,8 +134,6 @@ func _on_collision(body):
 		
 		apply_torque_impulse(angle_self*10)
 		go_forward()
-		
-
 
 
 func _on_enter_vision_collision(body):
