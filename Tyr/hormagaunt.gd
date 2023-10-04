@@ -58,13 +58,13 @@ func _process(delta):
 func state_change():
 	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
-		self.modulate = Color.WHITE
+		self.modulate = self.couleur.darkened(0.2)
 	elif self.list_body_to_approach:
 		self.current_state = state_possible.zerg
-		self.modulate = Color.RED
+		self.modulate = self.couleur.darkened(0.5)
 	else:
 		self.current_state = state_possible.exploration
-		self.modulate = Color.PURPLE
+		self.modulate = self.couleur
 
 func explore():
 	# generate target
