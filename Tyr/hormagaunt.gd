@@ -142,6 +142,8 @@ func _on_collision(body):
 		apply_torque_impulse(angle_self*10)
 		self.look_at(-angle_to_ruche)
 		go_forward()
+	if body.type in tyranids && body.ruche_mere != self.ruche_mere:
+		body.queue_free()
 
 
 func _on_enter_vision_collision(body):
