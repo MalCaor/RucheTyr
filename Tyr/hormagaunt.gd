@@ -88,7 +88,6 @@ func return_to_ruche(delta):
 	var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche)
 	
 	apply_torque_impulse(angle_self/2)
-	evasion_maneuver()
 	go_forward()
 
 		
@@ -100,7 +99,7 @@ func evasion_maneuver():
 		var angle_target:Vector2 = Vector2(dx,dy).normalized()
 		var angle_self:float = self.global_transform.x.angle_to(angle_target)
 		
-		apply_torque_impulse((angle_self/20) * -1)
+		apply_torque_impulse((angle_self/10) * -1)
 
 func zerg_maneuver():
 	# approch nour
@@ -127,16 +126,22 @@ func _on_collision(body):
 		body.eaten()
 		nbr_current_food += 1
 		self.modulate = Color.RED
-	if body.type == "Ruche" && nbr_current_food>0:
-		ruche_mere.give_food_to_Ruche(nbr_current_food)
-		nbr_current_food=0
-		self.modulate = couleur
+	elif body.type == "Ruche":
+		if nbr_current_food>0:
+			ruche_mere.give_food_to_Ruche(nbr_current_food)
+			nbr_current_food=0
+			self.modulate = couleur
+		
 		var dx:float = ruche_mere.position.x - position.x
 		var dy:float = ruche_mere.position.y - position.y
 		
-		var angle_to_ruche:Vector2 = -Vector2(dx,dy).normalized()
-		var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche)
-		apply_torque_impulse(angle_self)
+		var angle_to_ruche:Vector2 = Vector2(dx,dy).normalized()
+		var angle_self:float = self.global_transform.x.angle_to(angle_to_ruche*-1)
+		
+		apply_torque_impulse(angle_self*10)
+		go_forward()
+		
+
 
 
 func _on_enter_vision_collision(body):

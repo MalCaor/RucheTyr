@@ -12,14 +12,14 @@ var couleur = Color.VIOLET
 func _ready():
 	self.modulate = couleur
 	for x in 50:
-		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
+		add_tyr(hormagaunt, position+Vector2(randf_range(10,15), randf_range(10,15)))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(food_quantity>=5):
 		food_quantity-=5
-		add_tyr(hormagaunt, position+Vector2(randf(), randf()))
+		add_tyr(hormagaunt, position+Vector2(randf_range(10,15), randf_range(10,15)))
 
 func add_tyr(tyr_to_add, pos: Vector2):
 	var new_tyr: RigidBody2D = tyr_to_add.instantiate()
