@@ -190,3 +190,6 @@ func _on_exited_vision_nour(body):
 			list_body_to_approach.remove_at(list_body_to_approach.find(body))
 	if body.type in types_to_approach:
 		list_body_to_approach.remove_at(list_body_to_approach.find(body))
+
+func _exit_tree():
+	self.ruche_mere.list_tyr.remove_at(self.ruche_mere.list_tyr.find(self))
