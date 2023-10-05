@@ -38,6 +38,7 @@ var nbr_food_max: float = 2 # Quantite maximale qu'un agent peut transporter
 var nbr_current_food: float = 0 # Quantite actuelle que transporte un agent
 
 var target_explor: Vector2
+var timer_since_last_generation = 0
 
 var couleur: Color
 
@@ -74,15 +75,14 @@ func state_change():
 		self.modulate = self.couleur
 
 func generate_coor():
-	var pos = Vector2(0,0)
-	while (pos.x < 10 and pos.x > -10) and (pos.y < 5 and pos.y > -5):
-		pos = Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
-	return pos
+	return Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
 
 func explore():
 	# generate target
-	if not target_explor or self.position.distance_to(target_explor) < 20:
+	if not target_explor or self.position.distance_to(target_explor) < 20 or timer_since_last_generation < 50:
 		target_explor = generate_coor()
+		timer_since_last_generation = 0
+	timer_since_last_generation += 1
 	
 	# travel calculation
 	var angle_self = angle_to_target(target_explor)
