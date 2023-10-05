@@ -83,6 +83,7 @@ func explore():
 	# generate target
 	if not target_explor or self.position.distance_to(target_explor) < 20 or timer_since_last_generation < 500:
 		target_explor = generate_coor()
+		intrest_point = target_explor
 		timer_since_last_generation = 0
 	timer_since_last_generation += 1
 	
