@@ -19,7 +19,7 @@ func _process(delta):
 	timer+=delta
 	if timer > 15:
 		print("SPAWN")
-		#spawn_nour()
+		spawn_nour()
 		timer = 0
 
 func spawn_nour():
