@@ -167,7 +167,7 @@ func _on_collision(body):
 
 
 func _on_enter_vision_collision(body):
-	if body.type in types_to_avoid:
+	if body in list_body_to_evade:
 		list_body_to_evade.append(body)
 
 
@@ -188,14 +188,10 @@ func _on_entered_vision_nour(body):
 
 
 func _on_exited_vision_nour(body):
-	if body.type in tyranids:
-		if body.ruche_mere != self.ruche_mere:
-			list_body_to_approach.remove_at(list_body_to_approach.find(body))
-	#if body.type in ruches:
-	#	if body != self.ruche_mere:
-	#		list_body_to_approach.remove_at(list_body_to_approach.find(body))
-	if body.type in types_to_approach:
+	if body in list_body_to_approach:
 		list_body_to_approach.remove_at(list_body_to_approach.find(body))
+	if body in list_body_to_evade:
+		list_body_to_evade.remove_at(list_body_to_evade.find(body))
 
 func _exit_tree():
 	self.ruche_mere.list_tyr.remove_at(self.ruche_mere.list_tyr.find(self))
