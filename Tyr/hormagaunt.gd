@@ -144,7 +144,7 @@ func _on_collision(body):
 		self.look_at(-angle_to_ruche)
 		go_forward()
 	if body.type == "Ruche" && body != self.ruche_mere:
-		if nbr_current_food!=0:
+		if nbr_current_food<nbr_food_max:
 			nbr_current_food = body.get_food_of_Ruche(nbr_food_max - nbr_current_food)
 		
 		var dx:float = ruche_mere.position.x - position.x
