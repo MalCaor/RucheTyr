@@ -51,7 +51,7 @@ couleur = Color(0.176471, 0.717647, 0.937255, 1)
 
 [node name="Ruche4" parent="." instance=ExtResource("3_26ukf")]
 position = Vector2(-157, 83)
-couleur = Color(0.807843, 0.490196, 0.176471, 1)
+couleur = Color(0.890196, 0.792157, 0.172549, 1)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 z_index = -1

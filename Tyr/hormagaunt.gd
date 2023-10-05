@@ -48,7 +48,7 @@ var couleur: Color
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_state = state_possible.exploration
-	couleur = ruche_mere.couleur.darkened(0.1)
+	couleur = ruche_mere.couleur
 	self.modulate = couleur
 
 
@@ -68,13 +68,13 @@ func _process(delta):
 func state_change():
 	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
-		self.modulate = self.couleur.darkened(0.3)
+		self.modulate = self.couleur.darkened(0.2)
 	elif self.list_body_to_approach:
 		self.current_state = state_possible.zerg
-		self.modulate = self.couleur.lightened(0.3)
+		self.modulate = self.couleur
 	else:
 		self.current_state = state_possible.exploration
-		self.modulate = self.couleur
+		self.modulate = self.couleur.lightened(0.5)
 
 func generate_coor():
 	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 100) 
@@ -136,7 +136,7 @@ func angle_to_target(vector_target: Vector2):
 	
 func _on_collision(body):
 	if body.type == "Nourriture":
-		intrest_point = body.global_position
+		intrest_point = body.position
 		body.eaten()
 		nbr_current_food += 1
 		#self.modulate = Color.RED
@@ -154,7 +154,7 @@ func _on_collision(body):
 		self.look_at(-angle_to_ruche)
 		go_forward()
 	if body.type == "Ruche" && body != self.ruche_mere:
-		intrest_point = body.global_position
+		intrest_point = body.position
 		if nbr_current_food<nbr_food_max:
 			nbr_current_food = body.get_food_of_Ruche(nbr_food_max - nbr_current_food)
 		
