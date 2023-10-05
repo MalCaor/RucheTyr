@@ -15,10 +15,6 @@ script = ExtResource("1_ko22t")
 zoom = Vector2(2, 2)
 script = ExtResource("2_aoyn8")
 
-[node name="Ruche" parent="." instance=ExtResource("3_26ukf")]
-position = Vector2(151, -80)
-couleur = Color(0.975664, 4.57242e-06, 1.54018e-06, 1)
-
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 contact_monitor = true
 freeze = true
@@ -40,6 +36,10 @@ polygon = PackedVector2Array(-192, -152, -181, -150, -181, 162, -190, 163)
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="RigidBody2D"]
 position = Vector2(476, 5)
 polygon = PackedVector2Array(-198, -163, -188, -167, -187, 153, -195, 144)
+
+[node name="Ruche" parent="." instance=ExtResource("3_26ukf")]
+position = Vector2(151, -80)
+couleur = Color(0.975664, 4.57242e-06, 1.54018e-06, 1)
 
 [node name="Ruche2" parent="." instance=ExtResource("3_26ukf")]
 position = Vector2(-148, -73)

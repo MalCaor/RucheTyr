@@ -8,6 +8,8 @@ var food_quantity=50
 
 @export var couleur = Color.VIOLET
 
+var string_ruche = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.modulate = couleur
@@ -17,8 +19,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	string_ruche = "FOOD:"+str(self.food_quantity)+"\n Tyranids:"+str(self.list_tyr.size())
+	$Num.text = string_ruche
 	# creation de nouveaux agents
-	if(food_quantity>=50):
+	if(food_quantity>50):
 		food_quantity-=5
 		add_tyr(hormagaunt)
 	if(food_quantity<=0):
@@ -30,7 +34,6 @@ func add_tyr(tyr_to_add):
 	var new_tyr: RigidBody2D = tyr_to_add.instantiate()
 	new_tyr.ruche_mere = self
 	list_tyr.append(new_tyr)
-	$Num.text = str(list_tyr.size())
 	add_child(new_tyr)
 
 func give_food_to_Ruche(quantite:int):
