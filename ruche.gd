@@ -4,7 +4,7 @@ var type = "Ruche"
 
 var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
-var food_quantity=5
+var food_quantity=50
 
 @export var couleur = Color.VIOLET
 
@@ -18,7 +18,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# creation de nouveaux agents
-	if(food_quantity>=10):
+	if(food_quantity>=50):
 		food_quantity-=5
 		add_tyr(hormagaunt)
 	if(food_quantity<=0):
