@@ -37,7 +37,7 @@ var rotation_speed = 10 # Vitesse de rotation de l'agent
 var nbr_food_max: float = 2 # Quantite maximale qu'un agent peut transporter
 var nbr_current_food: float = 0 # Quantite actuelle que transporte un agent
 
-var target_explor: Vector2
+var target_explore: Vector2
 var timer_since_last_generation = 0
 
 var intrest_point: Vector2
@@ -81,14 +81,14 @@ func generate_coor():
 
 func explore():
 	# generate target
-	if not target_explor or self.position.distance_to(target_explor) < 20 or timer_since_last_generation < 500:
-		target_explor = generate_coor()
-		intrest_point = target_explor
+	if not target_explore or self.position.distance_to(target_explore) < 20 or timer_since_last_generation < 500:
+		target_explore = generate_coor()
+		intrest_point = target_explore
 		timer_since_last_generation = 0
 	timer_since_last_generation += 1
 	
 	# travel calculation
-	var angle_self = angle_to_target(target_explor)
+	var angle_self = angle_to_target(target_explore)
 	
 	# apply navigation
 	apply_torque_impulse(angle_self/2)
@@ -176,7 +176,7 @@ func _on_enter_vision_collision(body):
 		if body.ruche_mere != self.ruche_mere:
 			list_body_to_approach.append(body)
 	if body.type in tyranids and body.ruche_mere == ruche_mere:
-		body.target_explor = intrest_point
+		body.target_explore = intrest_point
 	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
