@@ -17,9 +17,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(food_quantity>=5):
+	# creation de nouveaux agents
+	if(food_quantity>=10):
 		food_quantity-=5
 		add_tyr(hormagaunt)
+	if(food_quantity<=0):
+		for t in list_tyr:
+			t.queue_free()
+		self.queue_free()
 
 func add_tyr(tyr_to_add):
 	var new_tyr: RigidBody2D = tyr_to_add.instantiate()
