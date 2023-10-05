@@ -167,12 +167,12 @@ func _on_collision(body):
 
 
 func _on_enter_vision_collision(body):
-	if body in list_body_to_evade:
+	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
 
 func _on_exit_vision_collision(body):
-	if body.type in types_to_avoid:
+	if body in list_body_to_evade:
 		list_body_to_evade.remove_at(list_body_to_evade.find(body))
 
 
