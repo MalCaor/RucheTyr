@@ -19,3 +19,10 @@ mesh = SubResource("SphereMesh_cf6i4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vuhc8")
 debug_color = Color(0.878431, 0, 0.827451, 0.419608)
+
+[node name="Num" type="RichTextLabel" parent="."]
+offset_left = -25.0
+offset_top = 5.0
+offset_right = 32.0
+offset_bottom = 45.0
+text = "Ruche"

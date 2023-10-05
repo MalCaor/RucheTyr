@@ -30,6 +30,7 @@ func add_tyr(tyr_to_add):
 	var new_tyr: RigidBody2D = tyr_to_add.instantiate()
 	new_tyr.ruche_mere = self
 	list_tyr.append(new_tyr)
+	$Num.text = str(list_tyr.size())
 	add_child(new_tyr)
 
 func give_food_to_Ruche(quantite:int):
