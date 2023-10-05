@@ -153,7 +153,7 @@ func _on_collision(body):
 		go_forward()
 	if body.type in tyranids && body.ruche_mere != self.ruche_mere:
 		# sur du 4+
-		if randi_range(0,6)>=5:
+		if randi_range(0,6)>=4:
 			body.queue_free()
 
 
