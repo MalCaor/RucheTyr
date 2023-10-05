@@ -77,7 +77,7 @@ func state_change():
 		self.modulate = self.couleur
 
 func generate_coor():
-	return Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
+	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 100) 
 
 func explore():
 	# generate target

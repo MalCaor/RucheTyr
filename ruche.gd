@@ -8,8 +8,6 @@ var food_quantity=20
 
 @export var couleur = Color.VIOLET
 
-var string_ruche = ""
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.modulate = couleur
