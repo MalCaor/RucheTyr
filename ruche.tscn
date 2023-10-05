@@ -23,7 +23,7 @@ debug_color = Color(0.878431, 0, 0.827451, 0.419608)
 [node name="Num" type="RichTextLabel" parent="."]
 offset_left = -9.0
 offset_top = 10.0
-offset_right = 32.0
+offset_right = 59.0
 offset_bottom = 45.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 7
