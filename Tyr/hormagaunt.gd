@@ -75,7 +75,7 @@ func state_change():
 
 func explore():
 	# generate target
-	if not target_explor or self.position.distance_to(target_explor) < 10:
+	if not target_explor or self.position.distance_to(target_explor) < 20:
 		target_explor = Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
 	
 	# travel calculation
