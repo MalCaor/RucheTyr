@@ -173,7 +173,7 @@ func _on_collision(body):
 
 func _on_enter_vision_collision(body):
 	if body.type in tyranids and body.ruche_mere == ruche_mere:
-		body.target_explor = intrest_point
+		body.target_explore = intrest_point
 	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
