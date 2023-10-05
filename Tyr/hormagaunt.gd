@@ -73,10 +73,16 @@ func state_change():
 		self.current_state = state_possible.exploration
 		self.modulate = self.couleur
 
+func generate_coor():
+	var pos = Vector2(0,0)
+	while (pos.x < 10 and pos.x > -10) and (pos.y < 5 and pos.y > -5):
+		pos = Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
+	return pos
+
 func explore():
 	# generate target
 	if not target_explor or self.position.distance_to(target_explor) < 20:
-		target_explor = Vector2(randf_range(-1,1), randf_range(-1,1)) * 100
+		target_explor = generate_coor()
 	
 	# travel calculation
 	var angle_self = angle_to_target(target_explor)
