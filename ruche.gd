@@ -4,7 +4,7 @@ var type = "Ruche"
 
 var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
-var food_quantity=50
+var food_quantity=20
 
 @export var couleur = Color.VIOLET
 
@@ -19,13 +19,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	string_ruche = "FOOD:"+str(self.food_quantity)+"\n Tyranids:"+str(self.list_tyr.size())
-	$Num.text = string_ruche
-	# creation de nouveaux agents
-	if(food_quantity>50):
+	$Num.text = "FOOD:"+str(self.food_quantity)+"\n Tyranids:"+str(self.list_tyr.size())
+	if(food_quantity>20): # creation de nouveaux agents
 		food_quantity-=5
 		add_tyr(hormagaunt)
-	if(food_quantity<=0):
+	if(food_quantity<=0): # Décès de la Ruche
 		for t in list_tyr:
 			t.queue_free()
 		self.queue_free()

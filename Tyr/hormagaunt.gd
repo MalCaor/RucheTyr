@@ -194,4 +194,5 @@ func _on_exited_vision_nour(body):
 		list_body_to_evade.remove_at(list_body_to_evade.find(body))
 
 func _exit_tree():
+	print("Hormagaunt POP")
 	self.ruche_mere.list_tyr.remove_at(self.ruche_mere.list_tyr.find(self))
