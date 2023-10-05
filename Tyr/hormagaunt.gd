@@ -172,6 +172,9 @@ func _on_collision(body):
 
 
 func _on_enter_vision_collision(body):
+	if body.type in tyranids:
+		if body.ruche_mere != self.ruche_mere:
+			list_body_to_approach.append(body)
 	if body.type in tyranids and body.ruche_mere == ruche_mere:
 		body.target_explor = intrest_point
 	if body.type in types_to_avoid:
@@ -181,12 +184,11 @@ func _on_enter_vision_collision(body):
 func _on_exit_vision_collision(body):
 	if body in list_body_to_evade:
 		list_body_to_evade.remove_at(list_body_to_evade.find(body))
+	if body.type in types_to_approach:
+		list_body_to_approach.append(body)
 
 
 func _on_entered_vision_nour(body):
-	if body.type in tyranids:
-		if body.ruche_mere != self.ruche_mere:
-			list_body_to_approach.append(body)
 	if body.type in ruches:
 		if body != self.ruche_mere:
 			list_body_to_approach.append(body)
