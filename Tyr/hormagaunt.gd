@@ -45,7 +45,7 @@ var couleur: Color
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_state = state_possible.exploration
-	couleur = ruche_mere.couleur.darkened(0.3)
+	couleur = ruche_mere.couleur.darkened(0.1)
 	self.modulate = couleur
 
 
@@ -65,10 +65,10 @@ func _process(delta):
 func state_change():
 	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
-		self.modulate = self.couleur.darkened(0.2)
+		self.modulate = self.couleur.darkened(0.3)
 	elif self.list_body_to_approach:
 		self.current_state = state_possible.zerg
-		self.modulate = self.couleur.darkened(0.5)
+		self.modulate = self.couleur.lightened(0.3)
 	else:
 		self.current_state = state_possible.exploration
 		self.modulate = self.couleur
