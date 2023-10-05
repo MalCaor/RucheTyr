@@ -4,7 +4,7 @@ var type = "Ruche"
 
 var list_tyr: Array[Node] = []
 var hormagaunt = load("res://Tyr/hormagaunt.tscn")
-var food_quantity=0
+var food_quantity=5
 
 @export var couleur = Color.VIOLET
 
