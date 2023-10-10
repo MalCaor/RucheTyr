@@ -82,7 +82,15 @@ func state_change():
 		self.modulate = self.couleur.lightened(0.5)
 
 func generate_coor():
-	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 100) 
+	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 100)
+	
+func draw_ligne_to_target(target: Vector2):
+	ligne_dest = Line2D.new()
+	ligne_dest.add_point(Vector2(0,0), 0)
+	ligne_dest.add_point(to_local(target), 1)
+	ligne_dest.width = 0.3
+	add_child(ligne_dest)
+	
 
 func explore():
 	# generate target
@@ -96,7 +104,8 @@ func explore():
 	timer_since_last_generation += 1
 	
 	# travel calculation
-	var angle_self = angle_to_target(interest_point)
+	draw_ligne_to_target(intrest_point)
+	var angle_self = angle_to_target(intrest_point)
 	
 	# apply navigation
 	apply_torque_impulse(angle_self/2)
@@ -127,11 +136,7 @@ func zerg_maneuver():
 		var body = list_body_to_approach[0]
 		
 		# draw line
-		ligne_dest = Line2D.new()
-		ligne_dest.add_point(Vector2(0,0), 0)
-		ligne_dest.add_point(to_local(body.global_position), 1)
-		ligne_dest.width = 0.5
-		add_child(ligne_dest)
+		draw_ligne_to_target(body.global_position)
 		
 		# go toward
 		var angle_self = angle_to_target(body.global_position)
