@@ -44,6 +44,8 @@ var intrest_point: Vector2
 
 var couleur: Color
 
+var ligne_dest: Line2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,6 +57,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	state_change()
+	if ligne_dest:
+		ligne_dest.queue_free()
+		ligne_dest = null
 	
 	if current_state == state_possible.exploration:
 		explore()
@@ -77,7 +82,7 @@ func state_change():
 		self.modulate = self.couleur.lightened(0.5)
 
 func generate_coor():
-	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 100) 
+	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 5000) 
 
 func explore():
 	# generate target
@@ -105,7 +110,7 @@ func return_to_ruche(delta):
 func evasion_maneuver():
 	for body in list_body_to_evade:
 		var angle_self = angle_to_target(body.position)
-		apply_torque_impulse((angle_self/10) * -1)
+		apply_torque_impulse((angle_self/50) * -1)
 
 func zerg_maneuver():
 	# approch nour
@@ -116,7 +121,16 @@ func zerg_maneuver():
 		self.intrest_point = Vector2(0,0)
 	elif list_body_to_approach:
 		var body = list_body_to_approach[0]
-		var angle_self = angle_to_target(body.position)
+		
+		# draw line
+		ligne_dest = Line2D.new()
+		ligne_dest.add_point(Vector2(0,0), 0)
+		ligne_dest.add_point(to_local(body.global_position), 1)
+		ligne_dest.width = 0.5
+		add_child(ligne_dest)
+		
+		# go toward
+		var angle_self = angle_to_target(body.global_position)
 		apply_torque_impulse(angle_self/2)
 		go_forward()
 	
@@ -176,11 +190,14 @@ func _on_collision(body):
 
 
 func _on_enter_vision_collision(body):
-	#if body.type in tyranids:
-	#	if body.ruche_mere != self.ruche_mere:
-	#		list_body_to_approach.append(body)
-	#if body.type in tyranids and body.ruche_mere == ruche_mere:
-	#	body.target_explore = intrest_point
+	if body.type in tyranids:
+		if body.ruche_mere != self.ruche_mere:
+			pass
+			#list_body_to_approach.append(body)
+		else:
+			list_body_to_evade.append(body)
+	if body.type in tyranids and body.ruche_mere == ruche_mere:
+		body.target_explore = intrest_point
 	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
@@ -193,6 +210,9 @@ func _on_exit_vision_collision(body):
 
 
 func _on_entered_vision_nour(body):
+	if body.type in tyranids:
+		if body.ruche_mere != self.ruche_mere:
+			list_body_to_approach.append(body)
 	if body.type in ruches:
 		if body != self.ruche_mere:
 			list_body_to_approach.append(body)
