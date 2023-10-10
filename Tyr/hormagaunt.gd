@@ -94,7 +94,7 @@ func draw_ligne_to_target(target: Vector2):
 
 func explore():
 	# generate target
-	if interest_point == Vector2(0,0) and (self.position.distance_to(interest_point) < 50 or timer_since_last_generation < 500):
+	if interest_point == Vector2(0,0) and (self.position.distance_to(interest_point) < 50 or timer_since_last_generation < 100):
 		interest_point = generate_coor()
 		timer_since_last_generation = 0
 	
@@ -104,8 +104,8 @@ func explore():
 	timer_since_last_generation += 1
 	
 	# travel calculation
-	draw_ligne_to_target(intrest_point)
-	var angle_self = angle_to_target(intrest_point)
+	draw_ligne_to_target(interest_point)
+	var angle_self = angle_to_target(interest_point)
 	
 	# apply navigation
 	apply_torque_impulse(angle_self/2)
