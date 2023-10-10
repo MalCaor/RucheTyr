@@ -82,7 +82,7 @@ func state_change():
 		self.modulate = self.couleur.lightened(0.5)
 
 func generate_coor():
-	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 5000) 
+	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 100) 
 
 func explore():
 	# generate target
@@ -197,7 +197,7 @@ func _on_enter_vision_collision(body):
 		else:
 			list_body_to_evade.append(body)
 	if body.type in tyranids and body.ruche_mere == ruche_mere:
-		body.target_explore = intrest_point
+		body.intrest_point = intrest_point
 	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
