@@ -41,6 +41,7 @@ var nbr_current_food: float = 0 # Quantite actuelle que transporte un agent
 var timer_since_last_generation = 0
 
 var interest_point: Vector2
+var generated_interest_point : bool = true
 
 var couleur: Color
 
@@ -94,13 +95,11 @@ func draw_ligne_to_target(target: Vector2):
 
 func explore():
 	# generate target
-	if interest_point == Vector2(0,0) and (self.position.distance_to(interest_point) < 50 or timer_since_last_generation < 100):
+	if (self.position.distance_to(interest_point) < 20 or timer_since_last_generation > 1000):
 		interest_point = generate_coor()
 		timer_since_last_generation = 0
-	
-	if timer_since_last_generation < 500:
-		self.interest_point = Vector2(0,0)
-	
+		self.generated_interest_point = true
+
 	timer_since_last_generation += 1
 	
 	# travel calculation
@@ -127,11 +126,11 @@ func evasion_maneuver():
 
 func zerg_maneuver():
 	# approch nour
-	if self.interest_point != Vector2(0,0):
+	if not self.generated_interest_point:
 		var angle_self = angle_to_target(self.interest_point)
 		apply_torque_impulse(angle_self/2)
 		go_forward()
-		self.interest_point = Vector2(0,0)
+		
 	elif list_body_to_approach:
 		var body = list_body_to_approach[0]
 		
@@ -182,6 +181,7 @@ func _on_collision(body):
 		go_forward()
 	if body.type == "Ruche" && body != self.ruche_mere:
 		interest_point = body.position
+		self.generated_interest_point = false
 		if nbr_current_food<nbr_food_max:
 			nbr_current_food = body.get_food_of_Ruche(nbr_food_max - nbr_current_food)
 		
@@ -206,6 +206,7 @@ func _on_enter_vision_collision(body):
 		else:
 			list_body_to_evade.append(body)
 			body.interest_point = interest_point
+			body.generated_interest_point = false
 	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
