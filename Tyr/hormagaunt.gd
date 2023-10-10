@@ -116,7 +116,7 @@ func zerg_maneuver():
 		apply_torque_impulse(angle_self/2)
 		go_forward()
 	
-	evasion_maneuver()
+	#evasion_maneuver()
 
 func go_forward():
 	apply_impulse(global_transform.x * speed)
