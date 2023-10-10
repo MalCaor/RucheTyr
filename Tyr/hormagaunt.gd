@@ -40,7 +40,7 @@ var nbr_current_food: float = 0 # Quantite actuelle que transporte un agent
 #var target_explore: Vector2
 var timer_since_last_generation = 0
 
-var intrest_point: Vector2
+var interest_point: Vector2
 
 var couleur: Color
 
@@ -86,13 +86,17 @@ func generate_coor():
 
 func explore():
 	# generate target
-	if intrest_point == Vector2(0,0) and (self.position.distance_to(intrest_point) < 20 or timer_since_last_generation < 500):
-		intrest_point = generate_coor()
+	if interest_point == Vector2(0,0) and (self.position.distance_to(interest_point) < 50 or timer_since_last_generation < 500):
+		interest_point = generate_coor()
 		timer_since_last_generation = 0
+	
+	if timer_since_last_generation < 500:
+		self.interest_point = Vector2(0,0)
+	
 	timer_since_last_generation += 1
 	
 	# travel calculation
-	var angle_self = angle_to_target(intrest_point)
+	var angle_self = angle_to_target(interest_point)
 	
 	# apply navigation
 	apply_torque_impulse(angle_self/2)
@@ -114,11 +118,11 @@ func evasion_maneuver():
 
 func zerg_maneuver():
 	# approch nour
-	if self.intrest_point != Vector2(0,0):
-		var angle_self = angle_to_target(self.intrest_point)
+	if self.interest_point != Vector2(0,0):
+		var angle_self = angle_to_target(self.interest_point)
 		apply_torque_impulse(angle_self/2)
 		go_forward()
-		self.intrest_point = Vector2(0,0)
+		self.interest_point = Vector2(0,0)
 	elif list_body_to_approach:
 		var body = list_body_to_approach[0]
 		
@@ -154,7 +158,7 @@ func angle_to_target(vector_target: Vector2):
 	
 func _on_collision(body):
 	if body.type == "Nourriture":
-		#intrest_point = body.position
+		#interest_point = body.position
 		body.eaten()
 		nbr_current_food += 1
 		#self.modulate = Color.RED
@@ -172,7 +176,7 @@ func _on_collision(body):
 		self.look_at(-angle_to_ruche)
 		go_forward()
 	if body.type == "Ruche" && body != self.ruche_mere:
-		intrest_point = body.position
+		interest_point = body.position
 		if nbr_current_food<nbr_food_max:
 			nbr_current_food = body.get_food_of_Ruche(nbr_food_max - nbr_current_food)
 		
@@ -196,8 +200,7 @@ func _on_enter_vision_collision(body):
 			#list_body_to_approach.append(body)
 		else:
 			list_body_to_evade.append(body)
-	if body.type in tyranids and body.ruche_mere == ruche_mere:
-		body.intrest_point = intrest_point
+			body.interest_point = interest_point
 	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
