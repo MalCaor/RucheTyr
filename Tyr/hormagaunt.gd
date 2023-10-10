@@ -37,7 +37,7 @@ var rotation_speed = 10 # Vitesse de rotation de l'agent
 var nbr_food_max: float = 2 # Quantite maximale qu'un agent peut transporter
 var nbr_current_food: float = 0 # Quantite actuelle que transporte un agent
 
-var target_explore: Vector2
+#var target_explore: Vector2
 var timer_since_last_generation = 0
 
 var intrest_point: Vector2
@@ -81,14 +81,13 @@ func generate_coor():
 
 func explore():
 	# generate target
-	if not target_explore or self.position.distance_to(target_explore) < 20 or timer_since_last_generation < 500:
-		target_explore = generate_coor()
-		intrest_point = target_explore
+	if intrest_point == Vector2(0,0) and (self.position.distance_to(intrest_point) < 20 or timer_since_last_generation < 500):
+		intrest_point = generate_coor()
 		timer_since_last_generation = 0
 	timer_since_last_generation += 1
 	
 	# travel calculation
-	var angle_self = angle_to_target(target_explore)
+	var angle_self = angle_to_target(intrest_point)
 	
 	# apply navigation
 	apply_torque_impulse(angle_self/2)
@@ -110,7 +109,12 @@ func evasion_maneuver():
 
 func zerg_maneuver():
 	# approch nour
-	if list_body_to_approach:
+	if self.intrest_point != Vector2(0,0):
+		var angle_self = angle_to_target(self.intrest_point)
+		apply_torque_impulse(angle_self/2)
+		go_forward()
+		self.intrest_point = Vector2(0,0)
+	elif list_body_to_approach:
 		var body = list_body_to_approach[0]
 		var angle_self = angle_to_target(body.position)
 		apply_torque_impulse(angle_self/2)
@@ -136,7 +140,7 @@ func angle_to_target(vector_target: Vector2):
 	
 func _on_collision(body):
 	if body.type == "Nourriture":
-		intrest_point = body.position
+		#intrest_point = body.position
 		body.eaten()
 		nbr_current_food += 1
 		#self.modulate = Color.RED
@@ -172,11 +176,11 @@ func _on_collision(body):
 
 
 func _on_enter_vision_collision(body):
-	if body.type in tyranids:
-		if body.ruche_mere != self.ruche_mere:
-			list_body_to_approach.append(body)
-	if body.type in tyranids and body.ruche_mere == ruche_mere:
-		body.target_explore = intrest_point
+	#if body.type in tyranids:
+	#	if body.ruche_mere != self.ruche_mere:
+	#		list_body_to_approach.append(body)
+	#if body.type in tyranids and body.ruche_mere == ruche_mere:
+	#	body.target_explore = intrest_point
 	if body.type in types_to_avoid:
 		list_body_to_evade.append(body)
 
