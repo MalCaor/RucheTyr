@@ -1,24 +1,31 @@
 extends RigidBody2D
 
+# type allow to identify the objet for other
 var type = "Hormagaunt"
 
+# mother hive
 var ruche_mere: RigidBody2D
 
+# list of body to evade of rush toward
 var list_body_to_evade: Array[RigidBody2D] = [] # liste des body à éviter 
+var list_body_to_approach: Array[RigidBody2D] = [] # liste des body à approcher 
 
+# different type of tyranids (curently only 1)
 var tyranids = [
 	"Hormagaunt"
 ]
 
+# type ruche
 var ruches = [
 	"Ruche"
 ]
 
+# types to avoid (currently only border)
 var types_to_avoid = [
 	"Border"
 ]
 
-var list_body_to_approach: Array[RigidBody2D] = [] # liste des body à approcher 
+# approch food
 var types_to_approach = [
 	"Nourriture"
 ]
@@ -71,7 +78,8 @@ func _process(delta):
 
 ### BEHAVIOUR FUNCTION ###
 
-func state_change():
+# change agent behaviour
+func state_change(): 
 	if self.nbr_current_food >= nbr_food_max && self.nbr_current_food!=0:
 		self.current_state = state_possible.return_ruche
 		self.modulate = self.couleur.darkened(0.2)
@@ -82,9 +90,11 @@ func state_change():
 		self.current_state = state_possible.exploration
 		self.modulate = self.couleur.lightened(0.5)
 
+# generate random coordonate
 func generate_coor():
 	return Vector2(randf_range(-1,1)* 100, randf_range(-1,1)* 100)
-	
+
+# draw a line to a point in space
 func draw_ligne_to_target(target: Vector2):
 	ligne_dest = Line2D.new()
 	ligne_dest.add_point(Vector2(0,0), 0)
@@ -92,7 +102,7 @@ func draw_ligne_to_target(target: Vector2):
 	ligne_dest.width = 0.3
 	add_child(ligne_dest)
 	
-
+# explore it's environement
 func explore():
 	# generate target
 	if (self.position.distance_to(interest_point) < 20 or timer_since_last_generation > 1000):
@@ -112,18 +122,20 @@ func explore():
 	evasion_maneuver()
 	go_forward()
 
+# return to hive to store food
 func return_to_ruche(delta):
 	var angle_self = angle_to_target(ruche_mere.position)
 	
 	apply_torque_impulse(angle_self/2)
 	go_forward()
 
-		
+# evade all object in list_body_to_evade
 func evasion_maneuver():
 	for body in list_body_to_evade:
 		var angle_self = angle_to_target(body.position)
 		apply_torque_impulse((angle_self/50) * -1)
 
+# rush toward first target in list_body_to_approach
 func zerg_maneuver():
 	# approch nour
 	if list_body_to_approach:
@@ -145,16 +157,15 @@ func zerg_maneuver():
 		var angle_self = angle_to_target(self.interest_point)
 		apply_torque_impulse(angle_self/2)
 		go_forward()
-		
-	
-	#evasion_maneuver()
 
+# avence
 func go_forward():
 	apply_impulse(global_transform.x * speed)
 	
 	
 ### UTILITY FUNCTION ###
 
+# return the angle to target
 func angle_to_target(vector_target: Vector2):
 	var dx:float = vector_target.x - global_position.x
 	var dy:float = vector_target.y - global_position.y
@@ -164,7 +175,7 @@ func angle_to_target(vector_target: Vector2):
 	return angle_self
 
 ### TRIGGER FUNCTION ###
-	
+
 func _on_collision(body):
 	if body.type == "Nourriture":
 		#interest_point = body.position
