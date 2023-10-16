@@ -126,21 +126,26 @@ func evasion_maneuver():
 
 func zerg_maneuver():
 	# approch nour
-	if not self.generated_interest_point:
+	if list_body_to_approach:
+		# Select first target
+		var body = list_body_to_approach[0]
+		
+		# draw line to target
+		draw_ligne_to_target(body.global_position)
+		
+		# go toward target
+		var angle_self = angle_to_target(body.global_position)
+		apply_torque_impulse(angle_self/2)
+		go_forward()
+	elif not self.generated_interest_point:
+		# draw line to intrest point
+		draw_ligne_to_target(self.interest_point)
+		
+		# go to target
 		var angle_self = angle_to_target(self.interest_point)
 		apply_torque_impulse(angle_self/2)
 		go_forward()
 		
-	elif list_body_to_approach:
-		var body = list_body_to_approach[0]
-		
-		# draw line
-		draw_ligne_to_target(body.global_position)
-		
-		# go toward
-		var angle_self = angle_to_target(body.global_position)
-		apply_torque_impulse(angle_self/2)
-		go_forward()
 	
 	#evasion_maneuver()
 
